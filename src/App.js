@@ -10,7 +10,7 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Agents from "./pages/Agents";
 import Houses, { housesLoader } from "./pages/houses/Houses";
-//import HouseDetail from "./pages/HouseDetail";
+import HouseDetail, {HouseDetailLoader} from "./pages/houses/HouseDetail";
 import Favorites from "./pages/Favorites";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -28,6 +28,7 @@ const router = createBrowserRouter(
       <Route path="agents" element={<Agents />} />
       <Route path="houses" element={<HousesLayout />} >
         <Route index element={<Houses />} loader={housesLoader} />
+        <Route path=":id" element={<HouseDetail />} loader={HouseDetailLoader} />
       </Route>
       <Route path="favorites" element={<Favorites />} />
       <Route path="register" element={<Register />} />
