@@ -2,9 +2,12 @@ import { Link, useLoaderData } from "react-router-dom";
 
 import Dropdown from "../../components/Dropdown"
 import Range from "../../components/Range"
+import { useState } from "react";
 
 export default function Houses() {
-  const houses = useLoaderData();
+
+  const allHouses = useLoaderData();
+  const [houses, setHouses] = useState(useLoaderData())
 
   let smallestPrice, biggestPrice;
   const uniqueTypes = new Set();
@@ -12,7 +15,7 @@ export default function Houses() {
   const uniquePrices = new Set();
   const priceArr = [];
 
-  houses.forEach((element) => {
+  allHouses.forEach((element) => {
     uniqueTypes.add(element.type);
     uniquePrices.add(element.price);
   });
@@ -26,11 +29,16 @@ export default function Houses() {
     Math.min(...priceArr),
     Math.max(...priceArr),
   ];
-  
+  const  handleDropdownChange = async e => {
+    const res = await fetch(`https://dinmaegler.onrender.com/homes?type_eq=${e.target.value}`);
+    const houses = await res.json();
+    setHouses(houses)
+  };
+
   return (
     <div className="houses">
       <div className="House-details_controls">
-        <Dropdown options={dropdownOptions} />
+        <Dropdown options={dropdownOptions} onChange={handleDropdownChange}/>
         <Range
           valueInit={smallestPrice}
           min={smallestPrice}
@@ -44,7 +52,7 @@ export default function Houses() {
           id="To"
         />
       </div>
-      <div>
+      <div className="houses-container">
         {houses.map((house) => (
           <Link to={house.id.toString()} key={house.id}>
             <img

@@ -7,10 +7,11 @@ export default function HouseDetail() {
 
   return (
     <div className="House-details">
-       <img src={house.images[0].url} alt="" width={500} height={300} />
-        <p> {house.adress1} </p>
-        <p> {house.postalcode} {house.city} </p>
-        <p> {house.type} • <small>Ejerugift: {house.cost}</small> </p>
+      <img src={house.images[0].url} alt="" width={500} height={300} />
+      <p> {house.adress1} </p>
+      <p> {house.postalcode} {house.city} </p>
+      <p> {house.type} • <small>Ejerugift: {house.cost}</small> </p>
+      <p>{house.description}</p>
     </div>
   );
 }
@@ -27,3 +28,4 @@ export const HouseDetailLoader = async ({ params }) => {
 
   return res.json();
 };
+

@@ -1,14 +1,12 @@
 
 //?type_eq=
-const Dropdown = ({ options }) => {
-  const  handleDropdownChange = async e => {
-    console.log('handleDropdownChange')
-  };
+const Dropdown = ({ options, onChange }) => {
+  
 
   return (
     <div>
       <label htmlFor="dropdown">Select an option:</label>
-      <select id="dropdown" onChange={handleDropdownChange}>
+      <select id="dropdown" onChange={onChange}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
