@@ -14,7 +14,7 @@ import Details from './pages/Details'
 import Favorites from './pages/Favorites'
 import Register from './pages/Register'
 import Login from './pages/Login'
-import Error from './pages/Error'
+import NotFound from './pages/NotFound'
 
 // layouts
 import RootLayout from './layouts/RootLayout'
@@ -30,7 +30,7 @@ const router = createBrowserRouter(
       <Route path="favorites" element={<Favorites />} />
       <Route path="register" element={<Register />} />
       <Route path="login" element={<Login />} />
-      <Route path="error" element={<Error />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 )
