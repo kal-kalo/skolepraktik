@@ -1,23 +1,24 @@
 import {
-  createBrowserRouter, 
+  createBrowserRouter,
   createRoutesFromElements,
-  Route, 
-  RouterProvider
-} from 'react-router-dom'
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 
 // pages
-import Home from './pages/Home'
-import Contact from './pages/Contact'
-import Agents from './pages/Agents'
-import List from './pages/List'
-import Details from './pages/Details'
-import Favorites from './pages/Favorites'
-import Register from './pages/Register'
-import Login from './pages/Login'
-import NotFound from './pages/NotFound'
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import Agents from "./pages/Agents";
+import Houses, { housesLoader } from "./pages/houses/Houses";
+//import HouseDetail from "./pages/HouseDetail";
+import Favorites from "./pages/Favorites";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 
 // layouts
-import RootLayout from './layouts/RootLayout'
+import RootLayout from "./layouts/RootLayout";
+import HousesLayout from "./layouts/HousesLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,20 +26,19 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="contact" element={<Contact />} />
       <Route path="agents" element={<Agents />} />
-      <Route path="list" element={<List />} />
-      <Route path="details" element={<Details />} />
+      <Route path="houses" element={<HousesLayout />} >
+        <Route index element={<Houses />} loader={housesLoader} />
+      </Route>
       <Route path="favorites" element={<Favorites />} />
       <Route path="register" element={<Register />} />
       <Route path="login" element={<Login />} />
       <Route path="*" element={<NotFound />} />
     </Route>
   )
-)
+);
 
 function App() {
-  return (
-    <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
