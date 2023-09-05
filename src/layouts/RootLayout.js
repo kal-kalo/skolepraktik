@@ -22,7 +22,7 @@ export default function RootLayout() {
         </span>
       </header>
       <main>
-        <Outlet />
+        <Outlet /> 
       </main>
       <footer>
         <div className="footer_div">

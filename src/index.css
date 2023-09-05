@@ -63,3 +63,14 @@ footer{
   flex-direction: column;
   gap: 50px;
 }
+
+.liked{
+  background-color: green;
+  color: white;
+}
+
+.houses-container, .favorites-container{
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
