@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+
 function Range(props) {
   const [value, setValue] = useState(props.valueInit);
   const handleChange = function(e){

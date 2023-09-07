@@ -1,33 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import Dropdown from "../../components/Dropdown";
 import Range from "../../components/Range";
 
 export const housesLoader = async () => {
-  try {
-    // Check if the data is already in localStorage
-    const cachedData = localStorage.getItem("cachedHousesData");
-    
-    if (cachedData) {
-      // If data is found in localStorage, parse and return it
-      return JSON.parse(cachedData);
-    } else {
-      // If data is not in localStorage, fetch it
       const res = await fetch("https://dinmaegler.onrender.com/homes");
       if (!res.ok) {
         throw Error("Could not fetch the list of houses");
       }
-
       const data = await res.json();
-
-      // Save the fetched data in localStorage
-      localStorage.setItem("cachedHousesData", JSON.stringify(data));
-
       return data;
-    }
-  } catch (error) {
-    throw error;
-  }
 };
 
 const getUniqueValues = (items, key) => {

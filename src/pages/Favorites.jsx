@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Favorites() {
+  const [fetchedFailed, setfetchedFailed] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [likedItems, setLikedItems] = useState(JSON.parse(localStorage.getItem("likedItems")) || []);
   const [fetchedLikedItems, setFetchedLikedItems] = useState([]);
 
@@ -24,8 +26,17 @@ export default function Favorites() {
       const fetchedItems = await Promise.all(
         likedItems.map((item) => fetchSingleItem(item))
       );
-      //The result of filter is a new array that contains only the items that are not null. These are the items that were successfully fetched without errors.
+            //The result of filter is a new array that contains only the items that are not null. These are the items that were successfully fetched without errors.
+      // Check if all fetch operations failed (result is an empty array or array of null values)
+    if (fetchedItems.every((item) => item === null)) {
+      // Handle the case where all fetch operations failed
+      console.error("All fetch operations failed");
+      setfetchedFailed(true)
+    } else {
+      // Filter out null values to keep only successfully fetched items
       setFetchedLikedItems(fetchedItems.filter((item) => item !== null));
+      setLoading(false)
+    }
     };
 
     if (likedItems.length > 0) {
@@ -45,7 +56,7 @@ export default function Favorites() {
   return (
     <div className="houses">
       <div className="houses-container">
-        {fetchedLikedItems.length > 0 ? (
+        {loading?(<p>Loading...</p>):fetchedFailed?(<p>All fetch operations failed</p>):fetchedLikedItems.length > 0 ? (
           fetchedLikedItems.map((house) => (
             <div key={house.id}>
               <Link to={house.id.toString()} key={house.id}>

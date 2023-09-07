@@ -1,9 +1,4 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-} from "react-router-dom";
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider,} from "react-router-dom";
 
 // pages
 import Home from "./pages/Home";
@@ -12,8 +7,8 @@ import Agents from "./pages/Agents";
 import Houses, { housesLoader } from "./pages/houses/Houses";
 import HouseDetail, {HouseDetailLoader} from "./pages/houses/HouseDetail";
 import Favorites from "./pages/Favorites";
-import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Signup from "./pages/signup";
 import NotFound from "./pages/NotFound";
 
 // layouts
@@ -30,9 +25,12 @@ const router = createBrowserRouter(
         <Route index element={<Houses />} loader={housesLoader} />
         <Route path=":id" element={<HouseDetail />} loader={HouseDetailLoader} />
       </Route>
-      <Route path="favorites" element={<Favorites />} />
-      <Route path="register" element={<Register />} />
+      <Route path="favorites" >
+        <Route index element={<Favorites />} />
+        <Route path=":id" element={<HouseDetail />} loader={HouseDetailLoader} />
+      </Route>
       <Route path="login" element={<Login />} />
+      <Route path="signup" element={<Signup />} />
       <Route path="*" element={<NotFound />} />
     </Route>
   )

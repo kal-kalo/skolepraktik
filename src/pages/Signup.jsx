@@ -1,11 +1,10 @@
 import Form from "../components/Form";
 
-export default function Contact() {
+export default function Signup() {
 
   const fields = [
-    { type: 'text', label: 'Name', value: 'name', placeholder:'Your name' },
-    { type: 'email', label: 'Email', value: 'email', placeholder:'email' },
-    { type: 'text', label: 'Your message', value: 'message', placeholder:'Your message' },
+    { type: 'email', placeholder:'email' },
+    { type: 'password', placeholder:'password' },
     { type: 'submit', value: 'Submit'},
   ];
   function handleSubmit(e){
@@ -14,7 +13,7 @@ export default function Contact() {
   }
     return (
       <div className="contact-os">
-        <h1>Kontakt os</h1>
+        <h1>Sign up</h1>
         <Form onSubmit={handleSubmit} inputs={fields}/>
       </div>
     )
