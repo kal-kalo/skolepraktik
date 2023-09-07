@@ -3,14 +3,6 @@ import { Link, useLoaderData } from "react-router-dom";
 import Dropdown from "../../components/Dropdown";
 import Range from "../../components/Range";
 
-export const housesLoader = async () => {
-      const res = await fetch("https://dinmaegler.onrender.com/homes");
-      if (!res.ok) {
-        throw Error("Could not fetch the list of houses");
-      }
-      const data = await res.json();
-      return data;
-};
 
 const getUniqueValues = (items, key) => {
   const uniqueValues = Array.from(new Set(items.map((item) => item[key])));
